@@ -587,8 +587,9 @@ public class Controller extends Thread {
 			public void run() {
 				// Get the connected peers
 				int myConnectedPeers = Network.getInstance().getImmutableHandshakedPeers().size();
-				LOGGER.debug("Node have {} connected peers", myConnectedPeers);
-				if (myConnectedPeers == 0) {
+				LOGGER.info("---->>>>>>   Node have {} connected peers", myConnectedPeers);
+				LOGGER.info("---->>>>>>   Node Minimum Peer Connection Configuration is: {} connected peers", Settings.getInstance().getMinPeers());
+				if (myConnectedPeers <= Settings.getInstance().getMinPeers()) {
 					// Restart node if we have 0 peers
 					LOGGER.info("Node have no connected peers, restarting node");
 					try {

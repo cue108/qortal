@@ -198,6 +198,8 @@ public class Settings {
 	private int minOutboundPeers = 32;
 	/** Maximum number of peer connections we allow. */
 	private int maxPeers = 64;
+	/** Minimum number of peer connections we require. */
+	private int minPeers = 0;
 	/** Number of slots to reserve for short-lived QDN data transfers */
 	private int maxDataPeers = 5;
 	/** Maximum number of threads for network engine. */
@@ -861,6 +863,10 @@ public class Settings {
 
 	public int getMaxPeers() {
 		return this.maxPeers;
+	}
+
+	public int getMinPeers() {
+		return this.minPeers;
 	}
 
 	public int getMaxDataPeers() {
