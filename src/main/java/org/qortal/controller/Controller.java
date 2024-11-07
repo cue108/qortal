@@ -587,11 +587,11 @@ public class Controller extends Thread {
 			public void run() {
 				// Get the connected peers
 				int myConnectedPeers = Network.getInstance().getImmutableHandshakedPeers().size();
-				LOGGER.info("---->>>>>>   Node have {} connected peers", myConnectedPeers);
-				LOGGER.info("---->>>>>>   Node Minimum Peer Connection Configuration is: {} connected peers", Settings.getInstance().getMinPeers());
+				LOGGER.debug("Node have {} connected peers", myConnectedPeers);
+				LOGGER.debug("Node Minimum Peer Connection Configuration is: {} connected peers", Settings.getInstance().getMinPeers());
 				if (myConnectedPeers <= Settings.getInstance().getMinPeers()) {
 					// Restart node if we have 0 peers
-					LOGGER.info("Node have no connected peers, restarting node");
+					LOGGER.info("Node has insufficient amount of connected peers, restarting node");
 					try {
 						RestartNode.attemptToRestart();
 					} catch (Exception e) {

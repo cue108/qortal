@@ -441,7 +441,20 @@ public class Settings {
 	 */
 	private long archivingPause = 3000;
 
-	// Domain mapping
+	/**
+	 * the external IP setting in settings.json
+	 */
+	private String externalIp = "";
+
+	public boolean isExternalIpSet() {
+		return !this.externalIp.isEmpty();
+    }
+
+    public String getExternalIp() {
+        return externalIp;
+    }
+
+    // Domain mapping
 	public static class ThreadLimit {
 		private String messageType;
 		private Integer limit;

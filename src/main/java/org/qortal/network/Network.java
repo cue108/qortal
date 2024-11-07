@@ -1318,7 +1318,7 @@ public class Network {
     // External IP / peerAddress tracking
 
     public void ourPeerAddressUpdated(String peerAddress) {
-        if (peerAddress == null || peerAddress.isEmpty()) {
+        if (peerAddress == null || peerAddress.isEmpty() || Settings.getInstance().isExternalIpSet()) {
             return;
         }
 
@@ -1399,7 +1399,9 @@ public class Network {
 
     public String getOurExternalIpAddress() {
         // FUTURE: replace port if UPnP is active, as it will be more accurate
-        return this.ourExternalIpAddress;
+        return Settings.getInstance().isExternalIpSet() ?
+                Settings.getInstance().getExternalIp() :
+                this.ourExternalIpAddress;
     }
 
     public String getOurExternalIpAddressAndPort() {
