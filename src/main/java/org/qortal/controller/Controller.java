@@ -579,27 +579,28 @@ public class Controller extends Thread {
 		// If GUI is enabled, we're no longer starting up but actually running now
 		Gui.getInstance().notifyRunning();
 
-		// Check every 10 minutes if we have enough connected peers
-		Timer checkConnectedPeers = new Timer();
-
-		checkConnectedPeers.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				// Get the connected peers
-				int myConnectedPeers = Network.getInstance().getImmutableHandshakedPeers().size();
-				LOGGER.debug("Node have {} connected peers", myConnectedPeers);
-				LOGGER.debug("Node Minimum Peer Connection Configuration is: {} connected peers", Settings.getInstance().getMinPeers());
-				if (myConnectedPeers <= Settings.getInstance().getMinPeers()) {
-					// Restart node if we have 0 peers
-					LOGGER.info("Node has insufficient amount of connected peers, restarting node");
-					try {
-						RestartNode.attemptToRestart();
-					} catch (Exception e) {
-						LOGGER.error("Unable to restart the node", e);
+		if (Settings.getInstance().isAutoRestartEnabled()) {
+			// Check every 10 minutes if we have enough connected peers
+			Timer checkConnectedPeers = new Timer();
+			checkConnectedPeers.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					// Get the connected peers
+					int myConnectedPeers = Network.getInstance().getImmutableHandshakedPeers().size();
+					LOGGER.info("Node have {} connected peers", myConnectedPeers);
+					LOGGER.info("Node Minimum Peer Connection Configuration is: {} connected peers", Settings.getInstance().getMinPeers());
+					if (myConnectedPeers <= Settings.getInstance().getMinPeers()) {
+						// Restart node if we have 0 peers
+						LOGGER.info("Node has insufficient amount of connected peers, restarting node");
+						try {
+							RestartNode.attemptToRestart();
+						} catch (Exception e) {
+							LOGGER.error("Unable to restart the node", e);
+						}
 					}
 				}
-			}
-		}, 10*60*1000, 10*60*1000);
+			}, 10*60*1000, 10*60*1000);
+		}
 
 		// Check every 10 minutes to see if the block minter is running
 		Timer checkBlockMinter = new Timer();
