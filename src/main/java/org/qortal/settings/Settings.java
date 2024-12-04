@@ -447,6 +447,10 @@ public class Settings {
 	 * the external IP setting in settings.json
 	 */
 	private String externalIp = "";
+	/**
+	 * switch on/off feature optimized connections settings
+	 */
+	private boolean useOptimizedConnectionSettings = true;
 
 	public boolean isExternalIpSet() {
 		return !this.externalIp.isEmpty();
@@ -456,7 +460,19 @@ public class Settings {
         return externalIp;
     }
 
-    // Domain mapping
+	public boolean useOptimizedConnectionSettings() {
+		return this.useOptimizedConnectionSettings;
+	}
+
+	private boolean balanceRecorderEnabled = false;
+
+	private int balanceRecorderPriority = 1;
+
+	private int balanceRecorderFrequency = 2*60*1000;
+
+	private int balanceRecorderCapacity = 1000;
+
+	// Domain mapping
 	public static class ThreadLimit {
 		private String messageType;
 		private Integer limit;
@@ -1248,5 +1264,21 @@ public class Settings {
 
 	public long getArchivingPause() {
 		return archivingPause;
+	}
+
+	public int getBalanceRecorderPriority() {
+		return balanceRecorderPriority;
+	}
+
+	public int getBalanceRecorderFrequency() {
+		return balanceRecorderFrequency;
+	}
+
+	public int getBalanceRecorderCapacity() {
+		return balanceRecorderCapacity;
+	}
+
+	public boolean isBalanceRecorderEnabled() {
+		return balanceRecorderEnabled;
 	}
 }

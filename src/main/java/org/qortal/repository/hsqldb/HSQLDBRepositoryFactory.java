@@ -38,6 +38,12 @@ public class HSQLDBRepositoryFactory implements RepositoryFactory {
 		// one-time initialization goes in here
 		this.connectionUrl = connectionUrl;
 
+		// use some HSQL connection optimization?
+		if (Settings.getInstance().useOptimizedConnectionSettings()){
+			this.connectionUrl = String.format("%s;hsqldb.default_table_type=CACHED;hsqldb.cache_size=20000;hsqldb.cache_rows=50000", this.connectionUrl);
+			LOGGER.info("Using the HSQL connection URL: {}", this.connectionUrl);
+		}
+
 		// Check no-one else is accessing database
 		try (Connection connection = DriverManager.getConnection(this.connectionUrl)) {
 			// We only need to check we can obtain connection. It will be auto-closed.
