@@ -215,7 +215,7 @@ public class Settings {
 	public long recoveryModeTimeout = 9999999999999L;
 
 	/** Minimum peer version number required in order to sync with them */
-	private String minPeerVersion = "4.6.3";
+	private String minPeerVersion = "4.6.5";
 	/** Whether to allow connections with peers below minPeerVersion
 	 * If true, we won't sync with them but they can still sync with us, and will show in the peers list
 	 * If false, sync will be blocked both ways, and they will not appear in the peers list */
@@ -224,7 +224,7 @@ public class Settings {
 	/** Minimum time (in seconds) that we should attempt to remain connected to a peer for */
 	private int minPeerConnectionTime = 2 * 60 * 60; // seconds
 	/** Maximum time (in seconds) that we should attempt to remain connected to a peer for */
-	private int maxPeerConnectionTime = 4 * 60 * 60; // seconds
+	private int maxPeerConnectionTime = 6 * 60 * 60; // seconds
 	/** Maximum time (in seconds) that a peer should remain connected when requesting QDN data */
 	private int maxDataPeerConnectionTime = 30 * 60; // seconds
 
@@ -283,7 +283,10 @@ public class Settings {
 	// Auto-update sources
 	private String[] autoUpdateRepos = new String[] {
 		"https://github.com/Qortal/qortal/raw/%s/qortal.update",
-		"https://raw.githubusercontent.com@151.101.16.133/Qortal/qortal/%s/qortal.update"
+		"https://raw.githubusercontent.com@151.101.16.133/Qortal/qortal/%s/qortal.update",
+	    "https://qortal.link/Auto-Update/%s/qortal.update",
+	    "https://qortal.name/Auto-Update/%s/qortal.update",
+	    "https://update.qortal.org/Auto-Update/%s/qortal.update"
 	};
 
 	// Lists
